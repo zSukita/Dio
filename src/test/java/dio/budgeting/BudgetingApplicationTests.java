@@ -9,7 +9,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -90,5 +92,69 @@ class BudgetingApplicationTests {
 
         assertEquals(2, alimentacao.size());
         assertEquals(1, transporte.size());
+    }
+
+    @Test
+    void shouldGetTotalIncomeBetweenDates() {
+        transactionService.createIncome(new BigDecimal("5000.00"), "Salário", "Salário");
+        transactionService.createIncome(new BigDecimal("2000.00"), "Freelance", "Trabalho");
+        transactionService.createExpense(new BigDecimal("1500.00"), "Aluguel", "Moradia");
+
+        LocalDateTime start = LocalDateTime.now().minusDays(1);
+        LocalDateTime end = LocalDateTime.now().plusDays(1);
+
+        BigDecimal totalIncome = transactionService.getTotalIncomeBetween(start, end);
+        assertEquals(new BigDecimal("7000.00"), totalIncome);
+    }
+
+    @Test
+    void shouldGetTotalExpenseBetweenDates() {
+        transactionService.createIncome(new BigDecimal("5000.00"), "Salário", "Salário");
+        transactionService.createExpense(new BigDecimal("1500.00"), "Aluguel", "Moradia");
+        transactionService.createExpense(new BigDecimal("300.00"), "Supermercado", "Alimentação");
+
+        LocalDateTime start = LocalDateTime.now().minusDays(1);
+        LocalDateTime end = LocalDateTime.now().plusDays(1);
+
+        BigDecimal totalExpense = transactionService.getTotalExpenseBetween(start, end);
+        assertEquals(new BigDecimal("1800.00"), totalExpense);
+    }
+
+    @Test
+    void shouldGetExpensesByCategory() {
+        transactionService.createExpense(new BigDecimal("1500.00"), "Aluguel", "Moradia");
+        transactionService.createExpense(new BigDecimal("300.00"), "Supermercado", "Alimentação");
+        transactionService.createExpense(new BigDecimal("100.00"), "Restaurante", "Alimentação");
+
+        LocalDateTime start = LocalDateTime.now().minusDays(1);
+        LocalDateTime end = LocalDateTime.now().plusDays(1);
+
+        Map<String, BigDecimal> byCategory = transactionService.getExpensesByCategoryBetween(start, end);
+        assertEquals(new BigDecimal("400.00"), byCategory.get("Alimentação"));
+        assertEquals(new BigDecimal("1500.00"), byCategory.get("Moradia"));
+    }
+
+    @Test
+    void shouldGetMonthlySummary() {
+        transactionService.createIncome(new BigDecimal("5000.00"), "Salário", "Salário");
+        transactionService.createExpense(new BigDecimal("1500.00"), "Aluguel", "Moradia");
+
+        List<Map<String, Object>> summary = transactionService.getMonthlySummary(3);
+        assertFalse(summary.isEmpty());
+        assertEquals(new BigDecimal("5000.00"), summary.get(0).get("totalIncome"));
+        assertEquals(new BigDecimal("1500.00"), summary.get(0).get("totalExpense"));
+        assertEquals(new BigDecimal("3500.00"), summary.get(0).get("balance"));
+    }
+
+    @Test
+    void shouldFindByDateRange() {
+        transactionService.createIncome(new BigDecimal("5000.00"), "Salário", "Salário");
+        transactionService.createExpense(new BigDecimal("1500.00"), "Aluguel", "Moradia");
+
+        LocalDateTime start = LocalDateTime.now().minusDays(1);
+        LocalDateTime end = LocalDateTime.now().plusDays(1);
+
+        List<Transaction> transactions = transactionService.findByDateRange(start, end);
+        assertEquals(2, transactions.size());
     }
 }

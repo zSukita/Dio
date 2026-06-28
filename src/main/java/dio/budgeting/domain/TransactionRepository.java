@@ -29,4 +29,13 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID> 
 
     @Query("SELECT t FROM Transaction t WHERE t.category = :category AND t.createdAt >= :startDate ORDER BY t.createdAt DESC")
     List<Transaction> findByCategoryAndCreatedAtAfter(@Param("category") String category, @Param("startDate") LocalDateTime startDate);
+
+    @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transaction t WHERE t.type = :type AND t.createdAt >= :startDate AND t.createdAt < :endDate")
+    BigDecimal sumByTypeBetween(@Param("type") Transaction.TransactionType type, @Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+
+    @Query("SELECT t.category, SUM(t.amount) as total FROM Transaction t WHERE t.type = 'EXPENSE' AND t.createdAt >= :startDate AND t.createdAt < :endDate GROUP BY t.category ORDER BY total DESC")
+    List<Object[]> sumExpensesByCategoryBetween(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+
+    @Query("SELECT t FROM Transaction t WHERE t.createdAt >= :startDate AND t.createdAt < :endDate ORDER BY t.createdAt DESC")
+    List<Transaction> findByDateRange(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 }

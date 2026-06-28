@@ -7,6 +7,7 @@ import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -59,5 +60,36 @@ public class TransactionTools {
     @Tool(name = "get_all_transactions", description = "Lista todas as transações")
     public List<Transaction> getAllTransactions() {
         return transactionService.findAll();
+    }
+
+    @Tool(name = "get_total_income", description = "Retorna o total de receitas em um período")
+    public BigDecimal getTotalIncome(
+            @ToolParam(description = "Data inicial no formato ISO (ex: 2024-01-01T00:00:00)") String startDate,
+            @ToolParam(description = "Data final no formato ISO (ex: 2024-12-31T23:59:59)") String endDate
+    ) {
+        return transactionService.getTotalIncomeBetween(LocalDateTime.parse(startDate), LocalDateTime.parse(endDate));
+    }
+
+    @Tool(name = "get_total_expense", description = "Retorna o total de despesas em um período")
+    public BigDecimal getTotalExpense(
+            @ToolParam(description = "Data inicial no formato ISO (ex: 2024-01-01T00:00:00)") String startDate,
+            @ToolParam(description = "Data final no formato ISO (ex: 2024-12-31T23:59:59)") String endDate
+    ) {
+        return transactionService.getTotalExpenseBetween(LocalDateTime.parse(startDate), LocalDateTime.parse(endDate));
+    }
+
+    @Tool(name = "get_expenses_by_category", description = "Retorna o total de despesas agrupadas por categoria em um período")
+    public Map<String, BigDecimal> getExpensesByCategory(
+            @ToolParam(description = "Data inicial no formato ISO (ex: 2024-01-01T00:00:00)") String startDate,
+            @ToolParam(description = "Data final no formato ISO (ex: 2024-12-31T23:59:59)") String endDate
+    ) {
+        return transactionService.getExpensesByCategoryBetween(LocalDateTime.parse(startDate), LocalDateTime.parse(endDate));
+    }
+
+    @Tool(name = "get_monthly_summary", description = "Retorna o resumo mensal (receitas, despesas e saldo) dos últimos N meses")
+    public List<Map<String, Object>> getMonthlySummary(
+            @ToolParam(description = "Número de meses para considerar (ex: 3 para últimos 3 meses)") int monthsBack
+    ) {
+        return transactionService.getMonthlySummary(monthsBack);
     }
 }

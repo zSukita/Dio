@@ -69,6 +69,39 @@ public class TransactionController {
         return ResponseEntity.ok(Map.of("balance", transactionService.getBalanceSince(java.time.LocalDateTime.parse(startDate))));
     }
 
+    @GetMapping("/income/total")
+    public ResponseEntity<Map<String, Object>> getTotalIncome(
+            @RequestParam String startDate, @RequestParam String endDate) {
+        return ResponseEntity.ok(Map.of("totalIncome",
+                transactionService.getTotalIncomeBetween(java.time.LocalDateTime.parse(startDate), java.time.LocalDateTime.parse(endDate))));
+    }
+
+    @GetMapping("/expense/total")
+    public ResponseEntity<Map<String, Object>> getTotalExpense(
+            @RequestParam String startDate, @RequestParam String endDate) {
+        return ResponseEntity.ok(Map.of("totalExpense",
+                transactionService.getTotalExpenseBetween(java.time.LocalDateTime.parse(startDate), java.time.LocalDateTime.parse(endDate))));
+    }
+
+    @GetMapping("/expense/by-category")
+    public ResponseEntity<Map<String, Object>> getExpensesByCategory(
+            @RequestParam String startDate, @RequestParam String endDate) {
+        return ResponseEntity.ok(Map.of("categories",
+                transactionService.getExpensesByCategoryBetween(java.time.LocalDateTime.parse(startDate), java.time.LocalDateTime.parse(endDate))));
+    }
+
+    @GetMapping("/summary/monthly")
+    public ResponseEntity<Map<String, Object>> getMonthlySummary(@RequestParam(defaultValue = "3") int months) {
+        return ResponseEntity.ok(Map.of("months", transactionService.getMonthlySummary(months)));
+    }
+
+    @GetMapping("/range")
+    public ResponseEntity<List<Transaction>> findByDateRange(
+            @RequestParam String startDate, @RequestParam String endDate) {
+        return ResponseEntity.ok(transactionService.findByDateRange(
+                java.time.LocalDateTime.parse(startDate), java.time.LocalDateTime.parse(endDate)));
+    }
+
     @PostMapping(value = "/ai/voice", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public ResponseEntity<byte[]> processVoiceCommand(@RequestParam("audio") MultipartFile audioFile) {
         try {
