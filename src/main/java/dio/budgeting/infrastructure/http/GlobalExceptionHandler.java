@@ -52,7 +52,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ApiResponse<Void>> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
-        return ApiResponse.badRequest("Valor inválido para o parâmetro '" + ex.getParameter().getParameterName() + "'");
+        String name = ex.getParameter() != null ? ex.getParameter().getParameterName() : ex.getName();
+        return ApiResponse.badRequest("Valor inválido para o parâmetro '" + name + "'");
     }
 
     @ExceptionHandler(Exception.class)

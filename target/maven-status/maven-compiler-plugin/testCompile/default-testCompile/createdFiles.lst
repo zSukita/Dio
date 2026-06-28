@@ -1,3 +1,5 @@
+dio\budgeting\application\ai\TransactionToolsTest.class
+dio\budgeting\infrastructure\http\ApiResponseTest.class
 dio\budgeting\infrastructure\ai\AiServiceTest.class
+dio\budgeting\infrastructure\http\GlobalExceptionHandlerTest.class
 dio\budgeting\infrastructure\http\TransactionControllerTest.class
-dio\budgeting\BudgetingApplicationTests.class

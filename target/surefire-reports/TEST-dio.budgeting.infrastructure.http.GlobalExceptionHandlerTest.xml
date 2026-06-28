@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="dio.budgeting.infrastructure.http.TransactionControllerTest" time="0.883" tests="11" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="dio.budgeting.infrastructure.http.GlobalExceptionHandlerTest" time="0.153" tests="8" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -66,42 +66,12 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="shouldListAllTransactions" classname="dio.budgeting.infrastructure.http.TransactionControllerTest" time="0.181">
-    <system-out><![CDATA[2026-06-28T16:05:09.938-03:00  INFO 23264 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [dio.budgeting.infrastructure.http.TransactionControllerTest]: TransactionControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-06-28T16:05:09.976-03:00  INFO 23264 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration dio.budgeting.BudgetingApplication for test class dio.budgeting.infrastructure.http.TransactionControllerTest
-
-  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
-
- :: Spring Boot ::                (v3.3.2)
-
-2026-06-28T16:05:10.023-03:00  INFO 23264 --- [           main] d.b.i.http.TransactionControllerTest     : Starting TransactionControllerTest using Java 25.0.1 with PID 23264 (started by lucas in C:\Users\lucas\OneDrive\Desktop\Dio)
-2026-06-28T16:05:10.023-03:00 DEBUG 23264 --- [           main] d.b.i.http.TransactionControllerTest     : Running with Spring Boot v3.3.2, Spring v6.1.11
-2026-06-28T16:05:10.023-03:00  INFO 23264 --- [           main] d.b.i.http.TransactionControllerTest     : The following 1 profile is active: "test"
-2026-06-28T16:05:10.408-03:00  INFO 23264 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-06-28T16:05:10.408-03:00  INFO 23264 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-06-28T16:05:10.409-03:00  INFO 23264 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-06-28T16:05:10.436-03:00  INFO 23264 --- [           main] d.b.i.http.TransactionControllerTest     : Started TransactionControllerTest in 0.456 seconds (process running for 11.865)
-]]></system-out>
-  </testcase>
-  <testcase name="shouldGetBalance" classname="dio.budgeting.infrastructure.http.TransactionControllerTest" time="0.011"/>
-  <testcase name="shouldGetLargestTransactions" classname="dio.budgeting.infrastructure.http.TransactionControllerTest" time="0.006"/>
-  <testcase name="shouldReturn404WhenTransactionNotFound" classname="dio.budgeting.infrastructure.http.TransactionControllerTest" time="0.015"/>
-  <testcase name="shouldSearchByDescription" classname="dio.budgeting.infrastructure.http.TransactionControllerTest" time="0.006"/>
-  <testcase name="shouldCreateIncomeViaRest" classname="dio.budgeting.infrastructure.http.TransactionControllerTest" time="0.104"/>
-  <testcase name="shouldReturn400ForMissingTextField" classname="dio.budgeting.infrastructure.http.TransactionControllerTest" time="0.007"/>
-  <testcase name="shouldCreateExpenseViaRest" classname="dio.budgeting.infrastructure.http.TransactionControllerTest" time="0.005"/>
-  <testcase name="shouldDeleteTransaction" classname="dio.budgeting.infrastructure.http.TransactionControllerTest" time="0.007">
-    <system-out><![CDATA[Response: {"success":true,"timestamp":"2026-06-28T16:05:10.7866856"}
-]]></system-out>
-  </testcase>
-  <testcase name="shouldReturn400ForInvalidAmount" classname="dio.budgeting.infrastructure.http.TransactionControllerTest" time="0.015"/>
-  <testcase name="shouldGetBalanceSince" classname="dio.budgeting.infrastructure.http.TransactionControllerTest" time="0.008">
-    <system-out><![CDATA[Response: {"success":true,"data":{"balance":3500.00},"timestamp":"2026-06-28T16:05:10.8117601"}
-]]></system-out>
-  </testcase>
+  <testcase name="shouldHandleMissingParam" classname="dio.budgeting.infrastructure.http.GlobalExceptionHandlerTest" time="0.003"/>
+  <testcase name="shouldHandleIllegalArgument" classname="dio.budgeting.infrastructure.http.GlobalExceptionHandlerTest" time="0.0"/>
+  <testcase name="shouldHandleValidation" classname="dio.budgeting.infrastructure.http.GlobalExceptionHandlerTest" time="0.004"/>
+  <testcase name="shouldHandleTypeMismatch" classname="dio.budgeting.infrastructure.http.GlobalExceptionHandlerTest" time="0.001"/>
+  <testcase name="shouldHandleDateTimeParse" classname="dio.budgeting.infrastructure.http.GlobalExceptionHandlerTest" time="0.001"/>
+  <testcase name="shouldHandleGenericException" classname="dio.budgeting.infrastructure.http.GlobalExceptionHandlerTest" time="0.0"/>
+  <testcase name="shouldHandleInvalidFormat" classname="dio.budgeting.infrastructure.http.GlobalExceptionHandlerTest" time="0.139"/>
+  <testcase name="shouldHandleInvalidFormatWithoutCause" classname="dio.budgeting.infrastructure.http.GlobalExceptionHandlerTest" time="0.0"/>
 </testsuite>
