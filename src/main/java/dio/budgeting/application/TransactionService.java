@@ -126,4 +126,64 @@ public class TransactionService {
     public List<Transaction> findByDateRange(LocalDateTime startDate, LocalDateTime endDate) {
         return repository.findByDateRange(startDate, endDate);
     }
+
+    @Transactional
+    public void deleteTransaction(UUID id) {
+        repository.deleteById(id);
+    }
+
+    public List<Transaction> getLargestTransactions() {
+        return repository.findTop5ByOrderByAmountDesc();
+    }
+
+    public List<Transaction> searchByDescription(String query) {
+        return repository.findByDescriptionContainingIgnoreCaseOrderByCreatedAtDesc(query);
+    }
+
+    public Map<String, BigDecimal> getIncomeByCategoryBetween(LocalDateTime startDate, LocalDateTime endDate) {
+        List<Object[]> result = repository.sumIncomeByCategoryBetween(startDate, endDate);
+        Map<String, BigDecimal> map = new java.util.LinkedHashMap<>();
+        for (Object[] row : result) {
+            map.put((String) row[0], (BigDecimal) row[1]);
+        }
+        return map;
+    }
+
+    public long countIncomes() {
+        return repository.countByType(Transaction.TransactionType.INCOME);
+    }
+
+    public long countExpenses() {
+        return repository.countByType(Transaction.TransactionType.EXPENSE);
+    }
+
+    public List<Map<String, Object>> getDailySummary(int daysBack) {
+        LocalDateTime endDate = LocalDateTime.now().plusDays(1);
+        LocalDateTime startDate = endDate.minusDays(daysBack);
+        List<Transaction> transactions = repository.findByDateRange(startDate, endDate);
+        Map<String, BigDecimal[]> daily = new java.util.LinkedHashMap<>();
+        for (Transaction t : transactions) {
+            String key = t.getCreatedAt().toLocalDate().toString();
+            daily.putIfAbsent(key, new BigDecimal[]{BigDecimal.ZERO, BigDecimal.ZERO});
+            BigDecimal[] amounts = daily.get(key);
+            if (t.getType() == Transaction.TransactionType.INCOME) {
+                amounts[0] = amounts[0].add(t.getAmount());
+            } else {
+                amounts[1] = amounts[1].add(t.getAmount());
+            }
+        }
+        List<Map<String, Object>> summary = new java.util.ArrayList<>();
+        List<String> keys = new java.util.ArrayList<>(daily.keySet());
+        java.util.Collections.sort(keys, java.util.Collections.reverseOrder());
+        for (String key : keys) {
+            BigDecimal[] amounts = daily.get(key);
+            Map<String, Object> day = new java.util.LinkedHashMap<>();
+            day.put("date", key);
+            day.put("totalIncome", amounts[0]);
+            day.put("totalExpense", amounts[1]);
+            day.put("balance", amounts[0].subtract(amounts[1]));
+            summary.add(day);
+        }
+        return summary;
+    }
 }

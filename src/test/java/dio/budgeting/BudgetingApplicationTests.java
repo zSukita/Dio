@@ -157,4 +157,83 @@ class BudgetingApplicationTests {
         List<Transaction> transactions = transactionService.findByDateRange(start, end);
         assertEquals(2, transactions.size());
     }
+
+    @Test
+    void shouldDeleteTransaction() {
+        Transaction income = transactionService.createIncome(new BigDecimal("1000.00"), "Salário", "Salário");
+        assertEquals(1, transactionService.findAll().size());
+
+        transactionService.deleteTransaction(income.getId());
+        assertEquals(0, transactionService.findAll().size());
+    }
+
+    @Test
+    void shouldGetBalanceSince() {
+        transactionService.createIncome(new BigDecimal("5000.00"), "Salário", "Salário");
+        transactionService.createExpense(new BigDecimal("1500.00"), "Aluguel", "Moradia");
+
+        LocalDateTime since = LocalDateTime.now().minusDays(1);
+        BigDecimal balance = transactionService.getBalanceSince(since);
+        assertEquals(new BigDecimal("3500.00"), balance);
+    }
+
+    @Test
+    void shouldGetLargestTransactions() {
+        transactionService.createExpense(new BigDecimal("50.00"), "Ônibus", "Transporte");
+        transactionService.createExpense(new BigDecimal("1500.00"), "Aluguel", "Moradia");
+        transactionService.createExpense(new BigDecimal("300.00"), "Supermercado", "Alimentação");
+        transactionService.createIncome(new BigDecimal("5000.00"), "Salário", "Salário");
+        transactionService.createExpense(new BigDecimal("200.00"), "Restaurante", "Alimentação");
+        transactionService.createExpense(new BigDecimal("100.00"), "Uber", "Transporte");
+
+        List<Transaction> largest = transactionService.getLargestTransactions();
+        assertEquals(5, largest.size());
+        assertEquals(new BigDecimal("5000.00"), largest.get(0).getAmount());
+    }
+
+    @Test
+    void shouldSearchByDescription() {
+        transactionService.createIncome(new BigDecimal("5000.00"), "Salário mensal", "Salário");
+        transactionService.createExpense(new BigDecimal("1500.00"), "Aluguel", "Moradia");
+        transactionService.createExpense(new BigDecimal("300.00"), "Supermercado", "Alimentação");
+
+        List<Transaction> results = transactionService.searchByDescription("salário");
+        assertEquals(1, results.size());
+        assertEquals("Salário mensal", results.get(0).getDescription());
+    }
+
+    @Test
+    void shouldGetIncomeByCategory() {
+        transactionService.createIncome(new BigDecimal("5000.00"), "Salário", "Salário");
+        transactionService.createIncome(new BigDecimal("2000.00"), "Freelance", "Trabalho");
+        transactionService.createExpense(new BigDecimal("1500.00"), "Aluguel", "Moradia");
+
+        LocalDateTime start = LocalDateTime.now().minusDays(1);
+        LocalDateTime end = LocalDateTime.now().plusDays(1);
+
+        Map<String, BigDecimal> byCategory = transactionService.getIncomeByCategoryBetween(start, end);
+        assertEquals(new BigDecimal("5000.00"), byCategory.get("Salário"));
+        assertEquals(new BigDecimal("2000.00"), byCategory.get("Trabalho"));
+    }
+
+    @Test
+    void shouldGetTransactionCounts() {
+        transactionService.createIncome(new BigDecimal("5000.00"), "Salário", "Salário");
+        transactionService.createIncome(new BigDecimal("2000.00"), "Freelance", "Trabalho");
+        transactionService.createExpense(new BigDecimal("1500.00"), "Aluguel", "Moradia");
+
+        assertEquals(2, transactionService.countIncomes());
+        assertEquals(1, transactionService.countExpenses());
+    }
+
+    @Test
+    void shouldGetDailySummary() {
+        transactionService.createIncome(new BigDecimal("5000.00"), "Salário", "Salário");
+        transactionService.createExpense(new BigDecimal("1500.00"), "Aluguel", "Moradia");
+
+        List<Map<String, Object>> summary = transactionService.getDailySummary(7);
+        assertFalse(summary.isEmpty());
+        assertEquals(new BigDecimal("5000.00"), summary.get(0).get("totalIncome"));
+        assertEquals(new BigDecimal("1500.00"), summary.get(0).get("totalExpense"));
+    }
 }

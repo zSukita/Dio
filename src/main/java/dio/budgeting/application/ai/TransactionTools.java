@@ -92,4 +92,50 @@ public class TransactionTools {
     ) {
         return transactionService.getMonthlySummary(monthsBack);
     }
+
+    @Tool(name = "delete_transaction", description = "Remove uma transação pelo ID")
+    public void deleteTransaction(
+            @ToolParam(description = "ID da transação no formato UUID (ex: 550e8400-e29b-41d4-a716-446655440000)") String id
+    ) {
+        transactionService.deleteTransaction(java.util.UUID.fromString(id));
+    }
+
+    @Tool(name = "get_balance_since", description = "Retorna o saldo a partir de uma data específica")
+    public Map<String, Object> getBalanceSince(
+            @ToolParam(description = "Data inicial no formato ISO (ex: 2024-01-01T00:00:00)") String startDate
+    ) {
+        return Map.of("balance", transactionService.getBalanceSince(java.time.LocalDateTime.parse(startDate)));
+    }
+
+    @Tool(name = "get_largest_transactions", description = "Retorna as 5 maiores transações (independente de tipo)")
+    public List<Transaction> getLargestTransactions() {
+        return transactionService.getLargestTransactions();
+    }
+
+    @Tool(name = "search_transactions", description = "Busca transações pelo texto da descrição")
+    public List<Transaction> searchTransactions(
+            @ToolParam(description = "Texto para buscar na descrição das transações") String query
+    ) {
+        return transactionService.searchByDescription(query);
+    }
+
+    @Tool(name = "get_income_by_category", description = "Retorna o total de receitas agrupadas por categoria em um período")
+    public Map<String, BigDecimal> getIncomeByCategory(
+            @ToolParam(description = "Data inicial no formato ISO (ex: 2024-01-01T00:00:00)") String startDate,
+            @ToolParam(description = "Data final no formato ISO (ex: 2024-12-31T23:59:59)") String endDate
+    ) {
+        return transactionService.getIncomeByCategoryBetween(java.time.LocalDateTime.parse(startDate), java.time.LocalDateTime.parse(endDate));
+    }
+
+    @Tool(name = "get_transaction_counts", description = "Retorna o total de receitas e despesas cadastradas")
+    public Map<String, Object> getTransactionCounts() {
+        return Map.of("totalIncomes", transactionService.countIncomes(), "totalExpenses", transactionService.countExpenses());
+    }
+
+    @Tool(name = "get_daily_summary", description = "Retorna o resumo diário (receitas, despesas e saldo por dia) dos últimos N dias")
+    public List<Map<String, Object>> getDailySummary(
+            @ToolParam(description = "Número de dias para considerar (ex: 7 para última semana)") int daysBack
+    ) {
+        return transactionService.getDailySummary(daysBack);
+    }
 }

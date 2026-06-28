@@ -38,4 +38,13 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID> 
 
     @Query("SELECT t FROM Transaction t WHERE t.createdAt >= :startDate AND t.createdAt < :endDate ORDER BY t.createdAt DESC")
     List<Transaction> findByDateRange(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+
+    List<Transaction> findTop5ByOrderByAmountDesc();
+
+    List<Transaction> findByDescriptionContainingIgnoreCaseOrderByCreatedAtDesc(String description);
+
+    @Query("SELECT t.category, SUM(t.amount) as total FROM Transaction t WHERE t.type = 'INCOME' AND t.createdAt >= :startDate AND t.createdAt < :endDate GROUP BY t.category ORDER BY total DESC")
+    List<Object[]> sumIncomeByCategoryBetween(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+
+    long countByType(Transaction.TransactionType type);
 }
