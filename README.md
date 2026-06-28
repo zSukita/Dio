@@ -242,6 +242,89 @@ src/main/java/dio/budgeting/
     └── jpa/             # (reservado para adaptadores JPA customizados)
 ```
 
+---
+
+## Proposta: Estude.ai — Assistente de Estudos com IA por Voz
+
+Assistente por voz para criar flashcards, revisar conteúdo e fazer sessões de estudo guiadas pela IA. O usuário fala "crie um flashcard: polimorfismo é..." e a IA cria, organiza e depois pergunta numa sessão de revisão.
+
+### Domain Model
+
+```
+┌─────────────────────┐       ┌──────────────────────┐
+│        Deck         │       │     Flashcard         │
+├─────────────────────┤       ├──────────────────────┤
+│ id: UUID            │──1:N──│ id: UUID             │
+│ name: String        │       │ question: String     │
+│ description: String │       │ answer: String       │
+│ subject: String     │       │ deckId: UUID         │
+│ createdAt           │       │ difficulty: E/M/H    │
+└─────────────────────┘       │ nextReview: DateTime │
+                              │ reviewCount: int     │
+┌─────────────────────┐       │ correctCount: int    │
+│   StudySession      │       │ createdAt            │
+├─────────────────────┤       └──────────────────────┘
+│ id: UUID            │
+│ deckId: UUID        │
+│ startedAt           │
+│ endedAt             │
+│ cardsReviewed: int  │
+│ correctAnswers: int │
+│ status: ACTIVE/DONE │
+└─────────────────────┘
+```
+
+### Tool Calling (12 ferramentas para a IA)
+
+| Ferramenta | Descrição |
+|---|---|
+| `create_deck` | Criar baralho por matéria |
+| `create_flashcard` | Adicionar card (pergunta + resposta) |
+| `search_flashcards` | Buscar cards por texto |
+| `get_due_flashcards` | Cards pendentes de revisão (spaced repetition) |
+| `start_study_session` | Iniciar sessão de estudo |
+| `answer_flashcard` | Responder um card (certo/errado) → recalcula `nextReview` |
+| `end_study_session` | Finalizar sessão e mostrar resumo |
+| `get_study_stats` | Estatísticas por matéria (acertos, cards revisados, streak) |
+| `get_decks` | Listar baralhos |
+| `get_flashcards_by_deck` | Listar cards de um baralho |
+| `delete_flashcard` | Remover card |
+| `suggest_review_plan` | IA sugere plano de revisão baseado no desempenho |
+
+### Fluxo de Voz
+
+```
+"vou estudar polimorfismo em Java"
+  → start_study_session("Polimorfismo em Java")
+  → IA pergunta: "O que é polimorfismo?"
+  → Usuário responde
+  → IA valida, marca certo/errado, explica se errou
+  → Próximo card...
+  → "finalizar sessão" → end_study_session() → resumo + próximos passos
+```
+
+### Exemplos de Comandos
+
+| O usuário fala | Ação da IA |
+|---|---|
+| "cria um baralho de Java" | `create_deck("Java")` |
+| "adiciona: o que é polimorfismo? resposta: capacidade de um objeto assumir várias formas" | `create_flashcard("Java", "O que é polimorfismo?", "...")` |
+| "quero revisar Java" | `start_study_session("Java")` → IA pergunta o primeiro card |
+| "acertei" | `answer_flashcard(id, true)` → próximo card |
+| "meu desempenho em Java" | `get_study_stats("Java")` |
+| "cards atrasados" | `get_due_flashcards()` |
+
+### Aproveitamento Técnico
+
+| Componente | Reutilização |
+|---|---|
+| Spring AI Tool Calling (`@Tool` + `MethodToolCallbackProvider`) | Idêntico |
+| Whisper + TTS (entrada/saída por voz) | Idêntico |
+| System Prompt enriquecido por canal (texto/voz) | Mesmo padrão |
+| Arquitetura em camadas (domain → application → infrastructure) | Idêntico |
+| `ApiResponse` + `GlobalExceptionHandler` | Reutilizável |
+| Testes com MockMvc + `@SpringBootTest` | Mesmo approach |
+
 ## Licença
 
 MIT
