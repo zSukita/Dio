@@ -4,7 +4,10 @@ import dio.budgeting.application.TransactionService;
 import dio.budgeting.domain.Transaction;
 import dio.budgeting.infrastructure.ai.AiService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -122,8 +125,8 @@ public class TransactionController {
     }
 
     public record CreateTransactionRequest(
-            @NotNull BigDecimal amount,
-            @NotNull String description,
-            @NotNull String category
+            @NotNull @DecimalMin(value = "0.01", message = "Valor deve ser positivo") BigDecimal amount,
+            @NotBlank @Size(max = 255) String description,
+            @NotBlank @Size(max = 100) String category
     ) {}
 }

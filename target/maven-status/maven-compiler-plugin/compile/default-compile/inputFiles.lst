@@ -5,4 +5,5 @@ C:\Users\lucas\OneDrive\Desktop\Dio\src\main\java\dio\budgeting\domain\Transacti
 C:\Users\lucas\OneDrive\Desktop\Dio\src\main\java\dio\budgeting\domain\TransactionRepository.java
 C:\Users\lucas\OneDrive\Desktop\Dio\src\main\java\dio\budgeting\infrastructure\ai\AiService.java
 C:\Users\lucas\OneDrive\Desktop\Dio\src\main\java\dio\budgeting\infrastructure\config\AiConfig.java
+C:\Users\lucas\OneDrive\Desktop\Dio\src\main\java\dio\budgeting\infrastructure\http\GlobalExceptionHandler.java
 C:\Users\lucas\OneDrive\Desktop\Dio\src\main\java\dio\budgeting\infrastructure\http\TransactionController.java

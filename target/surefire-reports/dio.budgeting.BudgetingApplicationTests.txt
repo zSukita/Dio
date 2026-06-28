@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: dio.budgeting.BudgetingApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.897 s -- in dio.budgeting.BudgetingApplicationTests
+Tests run: 26, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.103 s -- in dio.budgeting.BudgetingApplicationTests

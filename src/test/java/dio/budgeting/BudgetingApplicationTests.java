@@ -236,4 +236,53 @@ class BudgetingApplicationTests {
         assertEquals(new BigDecimal("5000.00"), summary.get(0).get("totalIncome"));
         assertEquals(new BigDecimal("1500.00"), summary.get(0).get("totalExpense"));
     }
+
+    @Test
+    void shouldRejectNegativeAmount() {
+        assertThrows(IllegalArgumentException.class,
+                () -> transactionService.createIncome(new BigDecimal("-100.00"), "Invalido", "Teste"));
+    }
+
+    @Test
+    void shouldRejectZeroAmount() {
+        assertThrows(IllegalArgumentException.class,
+                () -> transactionService.createExpense(BigDecimal.ZERO, "Invalido", "Teste"));
+    }
+
+    @Test
+    void shouldRejectNullDescription() {
+        assertThrows(IllegalArgumentException.class,
+                () -> transactionService.createIncome(new BigDecimal("100.00"), null, "Teste"));
+    }
+
+    @Test
+    void shouldRejectBlankDescription() {
+        assertThrows(IllegalArgumentException.class,
+                () -> transactionService.createExpense(new BigDecimal("100.00"), "   ", "Teste"));
+    }
+
+    @Test
+    void shouldRejectNullCategory() {
+        assertThrows(IllegalArgumentException.class,
+                () -> transactionService.createIncome(new BigDecimal("100.00"), "Teste", null));
+    }
+
+    @Test
+    void shouldRejectBlankCategory() {
+        assertThrows(IllegalArgumentException.class,
+                () -> transactionService.createExpense(new BigDecimal("100.00"), "Teste", "  "));
+    }
+
+    @Test
+    void shouldRejectExcessiveAmount() {
+        assertThrows(IllegalArgumentException.class,
+                () -> transactionService.createIncome(new BigDecimal("1000000000.00"), "Excesso", "Teste"));
+    }
+
+    @Test
+    void shouldTrimDescriptionAndCategory() {
+        Transaction t = transactionService.createIncome(new BigDecimal("100.00"), "  Teste  ", "  Categoria  ");
+        assertEquals("Teste", t.getDescription());
+        assertEquals("Categoria", t.getCategory());
+    }
 }

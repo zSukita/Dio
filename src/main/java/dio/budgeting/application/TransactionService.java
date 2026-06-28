@@ -22,11 +22,29 @@ public class TransactionService {
 
     @Transactional
     public Transaction createTransaction(BigDecimal amount, Transaction.TransactionType type, String description, String category) {
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Valor deve ser positivo");
+        }
+        if (amount.compareTo(new BigDecimal("999999999.99")) > 0) {
+            throw new IllegalArgumentException("Valor excede o limite máximo permitido");
+        }
+        if (description == null || description.isBlank()) {
+            throw new IllegalArgumentException("Descrição é obrigatória");
+        }
+        if (description.length() > 255) {
+            throw new IllegalArgumentException("Descrição deve ter no máximo 255 caracteres");
+        }
+        if (category == null || category.isBlank()) {
+            throw new IllegalArgumentException("Categoria é obrigatória");
+        }
+        if (category.length() > 100) {
+            throw new IllegalArgumentException("Categoria deve ter no máximo 100 caracteres");
+        }
         Transaction transaction = Transaction.builder()
                 .amount(amount)
                 .type(type)
-                .description(description)
-                .category(category)
+                .description(description.trim())
+                .category(category.trim())
                 .build();
         return repository.save(transaction);
     }
