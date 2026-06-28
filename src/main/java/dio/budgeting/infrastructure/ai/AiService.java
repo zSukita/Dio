@@ -3,7 +3,7 @@ package dio.budgeting.infrastructure.ai;
 import org.springframework.ai.audio.transcription.AudioTranscriptionPrompt;
 import org.springframework.ai.audio.transcription.AudioTranscriptionResponse;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.model.audio.transcription.TranscriptionModel;
+import org.springframework.ai.model.Model;
 import org.springframework.ai.openai.audio.speech.SpeechModel;
 import org.springframework.ai.openai.audio.speech.SpeechPrompt;
 import org.springframework.ai.openai.audio.speech.SpeechResponse;
@@ -18,11 +18,11 @@ import java.io.IOException;
 public class AiService {
 
     private final ChatClient chatClient;
-    private final TranscriptionModel transcriptionModel;
+    private final Model<AudioTranscriptionPrompt, AudioTranscriptionResponse> transcriptionModel;
     private final SpeechModel speechModel;
 
     public AiService(ChatClient chatClient,
-                     TranscriptionModel transcriptionModel,
+                     Model<AudioTranscriptionPrompt, AudioTranscriptionResponse> transcriptionModel,
                      SpeechModel speechModel) {
         this.chatClient = chatClient;
         this.transcriptionModel = transcriptionModel;
@@ -46,7 +46,7 @@ public class AiService {
         String systemPrompt = """
             Você é um assistente financeiro pessoal. Ajude o usuário a gerenciar suas finanças
             criando receitas, despesas e consultando saldos e transações.
-            
+
             Use as ferramentas disponíveis para executar as ações solicitadas.
             Responda sempre em português brasileiro de forma natural e amigável.
             """;
@@ -65,13 +65,8 @@ public class AiService {
     }
 
     public byte[] processAudioCommand(MultipartFile audioFile) throws IOException {
-        // 1. Transcribe audio to text
         String transcribedText = transcribeAudio(audioFile);
-
-        // 2. Process text with AI (which may call tools)
         String aiResponse = processTextCommand(transcribedText);
-
-        // 3. Generate speech from AI response
         return generateSpeech(aiResponse);
     }
 }

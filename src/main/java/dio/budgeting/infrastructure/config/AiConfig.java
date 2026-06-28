@@ -21,7 +21,7 @@ public class AiConfig {
     @Bean
     public ChatClient chatClient(ChatClient.Builder builder, ToolCallbackProvider toolCallbackProvider) {
         return builder
-                .defaultToolCallbacks(toolCallbackProvider)
+                .defaultTools(toolCallbackProvider)
                 .build();
     }
 }

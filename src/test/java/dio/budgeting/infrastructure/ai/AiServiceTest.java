@@ -5,15 +5,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.ai.audio.transcription.AudioTranscription;
 import org.springframework.ai.audio.transcription.AudioTranscriptionPrompt;
 import org.springframework.ai.audio.transcription.AudioTranscriptionResponse;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.model.audio.transcription.TranscriptionModel;
+import org.springframework.ai.model.Model;
+import org.springframework.ai.openai.audio.speech.Speech;
 import org.springframework.ai.openai.audio.speech.SpeechModel;
+import org.springframework.ai.openai.audio.speech.SpeechPrompt;
 import org.springframework.ai.openai.audio.speech.SpeechResponse;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.ByteArrayInputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -32,7 +33,7 @@ class AiServiceTest {
     private ChatClient.CallResponseSpec responseSpec;
 
     @Mock
-    private TranscriptionModel transcriptionModel;
+    private Model<AudioTranscriptionPrompt, AudioTranscriptionResponse> transcriptionModel;
 
     @Mock
     private SpeechModel speechModel;
@@ -44,12 +45,9 @@ class AiServiceTest {
     void shouldTranscribeAudio() throws Exception {
         MultipartFile audioFile = mock(MultipartFile.class);
         when(audioFile.getBytes()).thenReturn("fake audio content".getBytes());
-        when(audioFile.getOriginalFilename()).thenReturn("test.mp3");
 
-        AudioTranscriptionResponse transcriptionResponse = mock(AudioTranscriptionResponse.class);
-        var result = mock(org.springframework.ai.model.Result.class);
-        when(result.getOutput()).thenReturn("comprei almoço por trinta reais");
-        when(transcriptionResponse.getResult()).thenReturn(result);
+        AudioTranscription transcription = new AudioTranscription("comprei almoço por trinta reais");
+        AudioTranscriptionResponse transcriptionResponse = new AudioTranscriptionResponse(transcription);
         when(transcriptionModel.call(any(AudioTranscriptionPrompt.class))).thenReturn(transcriptionResponse);
 
         String transcribed = aiService.transcribeAudio(audioFile);
@@ -70,11 +68,9 @@ class AiServiceTest {
 
     @Test
     void shouldGenerateSpeech() {
-        var output = mock(org.springframework.ai.model.Result.class);
-        when(output.getOutput()).thenReturn("audio bytes".getBytes());
-        SpeechResponse speechResponse = mock(SpeechResponse.class);
-        when(speechResponse.getResult()).thenReturn(output);
-        when(speechModel.call(any())).thenReturn(speechResponse);
+        Speech speech = new Speech("audio bytes".getBytes());
+        SpeechResponse speechResponse = new SpeechResponse(speech);
+        when(speechModel.call(any(SpeechPrompt.class))).thenReturn(speechResponse);
 
         byte[] audio = aiService.generateSpeech("Receita criada com sucesso");
         assertNotNull(audio);
