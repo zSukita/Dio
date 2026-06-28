@@ -187,13 +187,39 @@ Invoke-WebRequest -Uri "http://localhost:8080/api/transactions/ai/text" `
 
 ### Testes automatizados
 
-```bash
-# Configurar variáveis e executar
+```powershell
 $env:OPENAI_API_KEY = "sk-placeholder"
-./mvnw.cmd test
+$env:JAVA_TOOL_OPTIONS = "--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
+mvn.cmd test
 ```
 
-> **Nota**: O Maven wrapper `.mvn/wrapper/maven-wrapper.jar` pode não funcionar. Use Maven 3.9.8 manualmente se necessário.
+> Se o Maven wrapper falhar, use um Maven 3.9+ instalado manualmente.
+
+### Cobertura de Testes
+
+| Classe de Teste | Tipo | Quantidade | O que testa |
+|---|---|---|---|
+| `BudgetingApplicationTests` | Integração (`@SpringBootTest`) | 26 | Service + Repository contra H2 real |
+| `TransactionControllerTest` | Slice REST (`@WebMvcTest`) | 11 | Endpoints com MockMvc |
+| `TransactionToolsTest` | Unitário (`MockitoExtension`) | 17 | 17 ferramentas `@Tool` da IA |
+| `GlobalExceptionHandlerTest` | Unitário | 8 | 7 handlers de exceção + genérico |
+| `ApiResponseTest` | Unitário | 9 | Factory methods + serialização |
+| `AiServiceTest` | Unitário (`MockitoExtension`) | 3 | Chat, transcrição e TTS com mocks |
+
+**Total: 74 testes** (73 passam, 1 erro pré-existente no `AiServiceTest.shouldTranscribeAudio` — `ClassCastException` entre `AudioTranscriptionPrompt` e `SpeechPrompt`, não relacionado às funcionalidades).
+
+### Executar Testes Específicos
+
+```powershell
+# Apenas testes de uma classe
+mvn.cmd test -Dtest=TransactionControllerTest
+
+# Apenas um teste específico
+mvn.cmd test -Dtest=TransactionControllerTest#shouldGetBalance
+
+# Várias classes
+mvn.cmd test -Dtest=TransactionControllerTest,TransactionToolsTest
+```
 
 ---
 
