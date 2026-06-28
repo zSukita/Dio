@@ -1,0 +1,32 @@
+package dio.budgeting.domain;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+@Repository
+public interface TransactionRepository extends JpaRepository<Transaction, UUID> {
+
+    List<Transaction> findByTypeOrderByCreatedAtDesc(Transaction.TransactionType type);
+
+    List<Transaction> findByCategoryOrderByCreatedAtDesc(String category);
+
+    @Query("SELECT SUM(CASE WHEN t.type = 'INCOME' THEN t.amount ELSE -t.amount END) FROM Transaction t")
+    Optional<BigDecimal> calculateBalance();
+
+    @Query("SELECT SUM(CASE WHEN t.type = 'INCOME' THEN t.amount ELSE -t.amount END) FROM Transaction t WHERE t.createdAt >= :startDate")
+    Optional<BigDecimal> calculateBalanceSince(@Param("startDate") LocalDateTime startDate);
+
+    @Query("SELECT t FROM Transaction t WHERE t.createdAt >= :startDate ORDER BY t.createdAt DESC")
+    List<Transaction> findByCreatedAtAfter(@Param("startDate") LocalDateTime startDate);
+
+    @Query("SELECT t FROM Transaction t WHERE t.category = :category AND t.createdAt >= :startDate ORDER BY t.createdAt DESC")
+    List<Transaction> findByCategoryAndCreatedAtAfter(@Param("category") String category, @Param("startDate") LocalDateTime startDate);
+}
