@@ -3,10 +3,8 @@ package dio.budgeting.infrastructure.ai;
 import org.springframework.ai.audio.transcription.AudioTranscriptionPrompt;
 import org.springframework.ai.audio.transcription.AudioTranscriptionResponse;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.model.audio.transcription.TranscriptionModel;
 import org.springframework.ai.openai.audio.speech.SpeechModel;
-import org.springframework.ai.openai.audio.speech.SpeechOptions;
 import org.springframework.ai.openai.audio.speech.SpeechPrompt;
 import org.springframework.ai.openai.audio.speech.SpeechResponse;
 import org.springframework.core.io.ByteArrayResource;
@@ -23,10 +21,10 @@ public class AiService {
     private final TranscriptionModel transcriptionModel;
     private final SpeechModel speechModel;
 
-    public AiService(ChatClient.Builder chatClientBuilder,
+    public AiService(ChatClient chatClient,
                      TranscriptionModel transcriptionModel,
                      SpeechModel speechModel) {
-        this.chatClient = chatClientBuilder.build();
+        this.chatClient = chatClient;
         this.transcriptionModel = transcriptionModel;
         this.speechModel = speechModel;
     }
@@ -61,9 +59,7 @@ public class AiService {
     }
 
     public byte[] generateSpeech(String text) {
-        SpeechPrompt prompt = new SpeechPrompt(text, SpeechOptions.builder()
-                .voice("alloy")
-                .build().build();
+        SpeechPrompt prompt = new SpeechPrompt(text);
         SpeechResponse response = speechModel.call(prompt);
         return response.getResult().getOutput();
     }
