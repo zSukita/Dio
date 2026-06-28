@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="dio.budgeting.BudgetingApplicationTests" time="9.103" tests="26" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="dio.budgeting.BudgetingApplicationTests" time="9.105" tests="26" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -17,8 +17,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="BR"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-25\bin"/>
-    <property name="sun.java.command" value="C:\Users\lucas\AppData\Local\Temp\surefire11402743227631751387\surefirebooter-20260628153846060_3.jar C:\Users\lucas\AppData\Local\Temp\surefire11402743227631751387 2026-06-28T15-38-45_880-jvmRun1 surefire-20260628153846060_1tmp surefire_0-20260628153846060_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\lucas\AppData\Local\Temp\surefire18249410375175228407\surefirebooter-20260628155700944_3.jar C:\Users\lucas\AppData\Local\Temp\surefire18249410375175228407 2026-06-28T15-57-00_775-jvmRun1 surefire-20260628155700944_1tmp surefire_0-20260628155700944_2tmp"/>
     <property name="jdk.debug" value="release"/>
+    <property name="test" value="BudgetingApplicationTests"/>
     <property name="surefire.test.class.path" value="C:\Users\lucas\OneDrive\Desktop\Dio\target\test-classes;C:\Users\lucas\OneDrive\Desktop\Dio\target\classes;C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.3.2\spring-boot-starter-web-3.3.2.jar;C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter\3.3.2\spring-boot-starter-3.3.2.jar;C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot\3.3.2\spring-boot-3.3.2.jar;C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.3.2\spring-boot-autoconfigure-3.3.2.jar;C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.3.2\spring-boot-starter-logging-3.3.2.jar;C:\Users\lucas\.m2\repository\ch\qos\logback\logback-classic\1.5.6\logback-classic-1.5.6.jar;C:\Users\lucas\.m2\repository\ch\qos\logback\logback-core\1.5.6\logback-core-1.5.6.jar;C:\Users\lucas\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.23.1\log4j-to-slf4j-2.23.1.jar;C:\Users\lucas\.m2\repository\org\apache\logging\log4j\log4j-api\2.23.1\log4j-api-2.23.1.jar;C:\Users\lucas\.m2\repository\org\slf4j\jul-to-slf4j\2.0.13\jul-to-slf4j-2.0.13.jar;C:\Users\lucas\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\lucas\.m2\repository\org\yaml\snakeyaml\2.2\snakeyaml-2.2.jar;C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.3.2\spring-boot-starter-json-3.3.2.jar;C:\Users\lucas\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.17.2\jackson-datatype-jdk8-2.17.2.jar;C:\Users\lucas\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.17.2\jackson-module-parameter-names-2.17.2.jar;C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.3.2\spring-boot-starter-tomcat-3.3.2.jar;C:\Users\lucas\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.26\tomcat-embed-core-10.1.26.jar;C:\Users\lucas\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.26\tomcat-embed-websocket-10.1.26.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-web\6.1.11\spring-web-6.1.11.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-beans\6.1.11\spring-beans-6.1.11.jar;C:\Users\lucas\.m2\repository\io\micrometer\micrometer-observation\1.13.2\micrometer-observation-1.13.2.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-webmvc\6.1.11\spring-webmvc-6.1.11.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-aop\6.1.11\spring-aop-6.1.11.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-expression\6.1.11\spring-expression-6.1.11.jar;C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\3.3.2\spring-boot-starter-data-jpa-3.3.2.jar;C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-aop\3.3.2\spring-boot-starter-aop-3.3.2.jar;C:\Users\lucas\.m2\repository\org\aspectj\aspectjweaver\1.9.22.1\aspectjweaver-1.9.22.1.jar;C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.3.2\spring-boot-starter-jdbc-3.3.2.jar;C:\Users\lucas\.m2\repository\com\zaxxer\HikariCP\5.1.0\HikariCP-5.1.0.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-jdbc\6.1.11\spring-jdbc-6.1.11.jar;C:\Users\lucas\.m2\repository\org\hibernate\orm\hibernate-core\6.5.2.Final\hibernate-core-6.5.2.Final.jar;C:\Users\lucas\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\lucas\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\lucas\.m2\repository\org\jboss\logging\jboss-logging\3.5.3.Final\jboss-logging-3.5.3.Final.jar;C:\Users\lucas\.m2\repository\org\hibernate\common\hibernate-commons-annotations\6.0.6.Final\hibernate-commons-annotations-6.0.6.Final.jar;C:\Users\lucas\.m2\repository\io\smallrye\jandex\3.1.2\jandex-3.1.2.jar;C:\Users\lucas\.m2\repository\com\fasterxml\classmate\1.7.0\classmate-1.7.0.jar;C:\Users\lucas\.m2\repository\net\bytebuddy\byte-buddy\1.14.18\byte-buddy-1.14.18.jar;C:\Users\lucas\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.5\jaxb-runtime-4.0.5.jar;C:\Users\lucas\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.5\jaxb-core-4.0.5.jar;C:\Users\lucas\.m2\repository\org\eclipse\angus\angus-activation\2.0.2\angus-activation-2.0.2.jar;C:\Users\lucas\.m2\repository\org\glassfish\jaxb\txw2\4.0.5\txw2-4.0.5.jar;C:\Users\lucas\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\lucas\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\lucas\.m2\repository\org\springframework\data\spring-data-jpa\3.3.2\spring-data-jpa-3.3.2.jar;C:\Users\lucas\.m2\repository\org\springframework\data\spring-data-commons\3.3.2\spring-data-commons-3.3.2.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-orm\6.1.11\spring-orm-6.1.11.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-tx\6.1.11\spring-tx-6.1.11.jar;C:\Users\lucas\.m2\repository\org\slf4j\slf4j-api\2.0.13\slf4j-api-2.0.13.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-aspects\6.1.11\spring-aspects-6.1.11.jar;C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-validation\3.3.2\spring-boot-starter-validation-3.3.2.jar;C:\Users\lucas\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.26\tomcat-embed-el-10.1.26.jar;C:\Users\lucas\.m2\repository\org\hibernate\validator\hibernate-validator\8.0.1.Final\hibernate-validator-8.0.1.Final.jar;C:\Users\lucas\.m2\repository\jakarta\validation\jakarta.validation-api\3.0.2\jakarta.validation-api-3.0.2.jar;C:\Users\lucas\.m2\repository\org\postgresql\postgresql\42.7.3\postgresql-42.7.3.jar;C:\Users\lucas\.m2\repository\org\checkerframework\checker-qual\3.42.0\checker-qual-3.42.0.jar;C:\Users\lucas\.m2\repository\com\h2database\h2\2.2.224\h2-2.2.224.jar;C:\Users\lucas\.m2\repository\org\springframework\ai\spring-ai-openai-spring-boot-starter\1.0.0-M6\spring-ai-openai-spring-boot-starter-1.0.0-M6.jar;C:\Users\lucas\.m2\repository\org\springframework\ai\spring-ai-spring-boot-autoconfigure\1.0.0-M6\spring-ai-spring-boot-autoconfigure-1.0.0-M6.jar;C:\Users\lucas\.m2\repository\org\springframework\ai\spring-ai-openai\1.0.0-M6\spring-ai-openai-1.0.0-M6.jar;C:\Users\lucas\.m2\repository\org\springframework\ai\spring-ai-retry\1.0.0-M6\spring-ai-retry-1.0.0-M6.jar;C:\Users\lucas\.m2\repository\org\springframework\retry\spring-retry\2.0.7\spring-retry-2.0.7.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-webflux\6.1.11\spring-webflux-6.1.11.jar;C:\Users\lucas\.m2\repository\io\rest-assured\json-path\5.4.0\json-path-5.4.0.jar;C:\Users\lucas\.m2\repository\org\apache\groovy\groovy-json\4.0.22\groovy-json-4.0.22.jar;C:\Users\lucas\.m2\repository\org\apache\groovy\groovy\4.0.22\groovy-4.0.22.jar;C:\Users\lucas\.m2\repository\io\rest-assured\rest-assured-common\5.4.0\rest-assured-common-5.4.0.jar;C:\Users\lucas\.m2\repository\org\apache\commons\commons-lang3\3.14.0\commons-lang3-3.14.0.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-context-support\6.1.11\spring-context-support-6.1.11.jar;C:\Users\lucas\.m2\repository\org\springframework\ai\spring-ai-core\1.0.0-M6\spring-ai-core-1.0.0-M6.jar;C:\Users\lucas\.m2\repository\com\fasterxml\jackson\module\jackson-module-jsonSchema\2.17.2\jackson-module-jsonSchema-2.17.2.jar;C:\Users\lucas\.m2\repository\javax\validation\validation-api\1.1.0.Final\validation-api-1.1.0.Final.jar;C:\Users\lucas\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.17.2\jackson-annotations-2.17.2.jar;C:\Users\lucas\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.17.2\jackson-core-2.17.2.jar;C:\Users\lucas\.m2\repository\io\swagger\core\v3\swagger-annotations\2.2.25\swagger-annotations-2.2.25.jar;C:\Users\lucas\.m2\repository\com\github\victools\jsonschema-module-swagger-2\4.37.0\jsonschema-module-swagger-2-4.37.0.jar;C:\Users\lucas\.m2\repository\org\antlr\ST4\4.3.4\ST4-4.3.4.jar;C:\Users\lucas\.m2\repository\org\antlr\antlr-runtime\3.5.3\antlr-runtime-3.5.3.jar;C:\Users\lucas\.m2\repository\org\antlr\antlr4-runtime\4.13.1\antlr4-runtime-4.13.1.jar;C:\Users\lucas\.m2\repository\io\projectreactor\reactor-core\3.6.8\reactor-core-3.6.8.jar;C:\Users\lucas\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-context\6.1.11\spring-context-6.1.11.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-messaging\6.1.11\spring-messaging-6.1.11.jar;C:\Users\lucas\.m2\repository\io\micrometer\micrometer-core\1.13.2\micrometer-core-1.13.2.jar;C:\Users\lucas\.m2\repository\io\micrometer\micrometer-commons\1.13.2\micrometer-commons-1.13.2.jar;C:\Users\lucas\.m2\repository\org\hdrhistogram\HdrHistogram\2.2.2\HdrHistogram-2.2.2.jar;C:\Users\lucas\.m2\repository\org\latencyutils\LatencyUtils\2.0.3\LatencyUtils-2.0.3.jar;C:\Users\lucas\.m2\repository\io\micrometer\context-propagation\1.1.1\context-propagation-1.1.1.jar;C:\Users\lucas\.m2\repository\com\knuddels\jtokkit\1.1.0\jtokkit-1.1.0.jar;C:\Users\lucas\.m2\repository\com\github\victools\jsonschema-generator\4.37.0\jsonschema-generator-4.37.0.jar;C:\Users\lucas\.m2\repository\com\github\victools\jsonschema-module-jackson\4.37.0\jsonschema-module-jackson-4.37.0.jar;C:\Users\lucas\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.17.2\jackson-databind-2.17.2.jar;C:\Users\lucas\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.17.2\jackson-datatype-jsr310-2.17.2.jar;C:\Users\lucas\.m2\repository\org\projectlombok\lombok\1.18.46\lombok-1.18.46.jar;C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.3.2\spring-boot-starter-test-3.3.2.jar;C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-test\3.3.2\spring-boot-test-3.3.2.jar;C:\Users\lucas\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.3.2\spring-boot-test-autoconfigure-3.3.2.jar;C:\Users\lucas\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\lucas\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.2\jakarta.xml.bind-api-4.0.2.jar;C:\Users\lucas\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.3\jakarta.activation-api-2.1.3.jar;C:\Users\lucas\.m2\repository\net\minidev\json-smart\2.5.1\json-smart-2.5.1.jar;C:\Users\lucas\.m2\repository\net\minidev\accessors-smart\2.5.1\accessors-smart-2.5.1.jar;C:\Users\lucas\.m2\repository\org\ow2\asm\asm\9.6\asm-9.6.jar;C:\Users\lucas\.m2\repository\org\assertj\assertj-core\3.25.3\assertj-core-3.25.3.jar;C:\Users\lucas\.m2\repository\org\awaitility\awaitility\4.2.1\awaitility-4.2.1.jar;C:\Users\lucas\.m2\repository\org\hamcrest\hamcrest\2.2\hamcrest-2.2.jar;C:\Users\lucas\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.3\junit-jupiter-5.10.3.jar;C:\Users\lucas\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.3\junit-jupiter-params-5.10.3.jar;C:\Users\lucas\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.3\junit-jupiter-engine-5.10.3.jar;C:\Users\lucas\.m2\repository\org\junit\platform\junit-platform-engine\1.10.3\junit-platform-engine-1.10.3.jar;C:\Users\lucas\.m2\repository\org\mockito\mockito-core\5.11.0\mockito-core-5.11.0.jar;C:\Users\lucas\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.18\byte-buddy-agent-1.14.18.jar;C:\Users\lucas\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\lucas\.m2\repository\org\skyscreamer\jsonassert\1.5.3\jsonassert-1.5.3.jar;C:\Users\lucas\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-core\6.1.11\spring-core-6.1.11.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-jcl\6.1.11\spring-jcl-6.1.11.jar;C:\Users\lucas\.m2\repository\org\springframework\spring-test\6.1.11\spring-test-6.1.11.jar;C:\Users\lucas\.m2\repository\org\xmlunit\xmlunit-core\2.9.1\xmlunit-core-2.9.1.jar;C:\Users\lucas\.m2\repository\org\mockito\mockito-junit-jupiter\5.11.0\mockito-junit-jupiter-5.11.0.jar;C:\Users\lucas\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.3\junit-jupiter-api-5.10.3.jar;C:\Users\lucas\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\lucas\.m2\repository\org\junit\platform\junit-platform-commons\1.10.3\junit-platform-commons-1.10.3.jar;C:\Users\lucas\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\lucas"/>
@@ -34,7 +35,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="C:\Users\lucas\AppData\Local\Temp\surefire11402743227631751387\surefirebooter-20260628153846060_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\lucas\AppData\Local\Temp\surefire18249410375175228407\surefirebooter-20260628155700944_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25.0.1+8-LTS-27"/>
@@ -53,7 +54,7 @@
     <property name="user.dir" value="C:\Users\lucas\OneDrive\Desktop\Dio"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="2576"/>
+    <property name="PID" value="2152"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
     <property name="native.encoding" value="Cp1252"/>
@@ -66,9 +67,9 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="shouldGetTotalExpenseBetweenDates" classname="dio.budgeting.BudgetingApplicationTests" time="0.823">
-    <system-out><![CDATA[15:38:47.478 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [dio.budgeting.BudgetingApplicationTests]: BudgetingApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-15:38:47.631 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration dio.budgeting.BudgetingApplication for test class dio.budgeting.BudgetingApplicationTests
+  <testcase name="shouldGetTotalExpenseBetweenDates" classname="dio.budgeting.BudgetingApplicationTests" time="0.858">
+    <system-out><![CDATA[15:57:02.192 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [dio.budgeting.BudgetingApplicationTests]: BudgetingApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+15:57:02.361 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration dio.budgeting.BudgetingApplication for test class dio.budgeting.BudgetingApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -79,20 +80,20 @@
 
  :: Spring Boot ::                (v3.3.2)
 
-2026-06-28T15:38:48.190-03:00  INFO 2576 --- [           main] d.budgeting.BudgetingApplicationTests    : Starting BudgetingApplicationTests using Java 25.0.1 with PID 2576 (started by lucas in C:\Users\lucas\OneDrive\Desktop\Dio)
-2026-06-28T15:38:48.191-03:00 DEBUG 2576 --- [           main] d.budgeting.BudgetingApplicationTests    : Running with Spring Boot v3.3.2, Spring v6.1.11
-2026-06-28T15:38:48.192-03:00  INFO 2576 --- [           main] d.budgeting.BudgetingApplicationTests    : The following 1 profile is active: "test"
-2026-06-28T15:38:49.453-03:00  INFO 2576 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-28T15:38:49.654-03:00  INFO 2576 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 190 ms. Found 1 JPA repository interface.
-2026-06-28T15:38:50.256-03:00  INFO 2576 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-06-28T15:38:50.361-03:00  INFO 2576 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
-2026-06-28T15:38:50.415-03:00  INFO 2576 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-06-28T15:38:50.911-03:00  INFO 2576 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-28T15:38:50.950-03:00  INFO 2576 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-06-28T15:38:51.201-03:00  INFO 2576 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
-2026-06-28T15:38:51.204-03:00  INFO 2576 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-06-28T15:38:51.238-03:00  WARN 2576 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-28T15:38:52.381-03:00  INFO 2576 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-28T15:57:02.912-03:00  INFO 2152 --- [           main] d.budgeting.BudgetingApplicationTests    : Starting BudgetingApplicationTests using Java 25.0.1 with PID 2152 (started by lucas in C:\Users\lucas\OneDrive\Desktop\Dio)
+2026-06-28T15:57:02.913-03:00 DEBUG 2152 --- [           main] d.budgeting.BudgetingApplicationTests    : Running with Spring Boot v3.3.2, Spring v6.1.11
+2026-06-28T15:57:02.914-03:00  INFO 2152 --- [           main] d.budgeting.BudgetingApplicationTests    : The following 1 profile is active: "test"
+2026-06-28T15:57:04.126-03:00  INFO 2152 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-28T15:57:04.327-03:00  INFO 2152 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 191 ms. Found 1 JPA repository interface.
+2026-06-28T15:57:04.939-03:00  INFO 2152 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-28T15:57:05.044-03:00  INFO 2152 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-06-28T15:57:05.102-03:00  INFO 2152 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-06-28T15:57:05.594-03:00  INFO 2152 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-28T15:57:05.633-03:00  INFO 2152 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-28T15:57:05.886-03:00  INFO 2152 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-06-28T15:57:05.889-03:00  INFO 2152 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-28T15:57:05.924-03:00  WARN 2152 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-28T15:57:07.084-03:00  INFO 2152 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: 
     drop table if exists transactions cascade 
 Hibernate: 
@@ -106,11 +107,11 @@ Hibernate:
         type enum ('EXPENSE','INCOME') not null,
         primary key (id)
     )
-2026-06-28T15:38:52.440-03:00  INFO 2576 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-28T15:38:52.831-03:00  INFO 2576 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-06-28T15:38:54.717-03:00  WARN 2576 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-06-28T15:38:55.154-03:00  INFO 2576 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
-2026-06-28T15:38:55.218-03:00  INFO 2576 --- [           main] d.budgeting.BudgetingApplicationTests    : Started BudgetingApplicationTests in 7.385 seconds (process running for 8.888)
+2026-06-28T15:57:07.143-03:00  INFO 2152 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-28T15:57:07.550-03:00  INFO 2152 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-28T15:57:09.428-03:00  WARN 2152 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-28T15:57:09.861-03:00  INFO 2152 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2026-06-28T15:57:09.914-03:00  INFO 2152 --- [           main] d.budgeting.BudgetingApplicationTests    : Started BudgetingApplicationTests in 7.355 seconds (process running for 8.762)
 Hibernate: 
     insert 
     into
@@ -148,7 +149,7 @@ WARNING: If a serviceability tool is not in use, please run with -Djdk.instrumen
 WARNING: Dynamic loading of agents will be disallowed by default in a future release
 ]]></system-err>
   </testcase>
-  <testcase name="shouldFindByType" classname="dio.budgeting.BudgetingApplicationTests" time="0.043">
+  <testcase name="shouldFindByType" classname="dio.budgeting.BudgetingApplicationTests" time="0.042">
     <system-out><![CDATA[Hibernate: 
     insert 
     into
@@ -202,9 +203,9 @@ Hibernate:
         t1_0.created_at desc
 ]]></system-out>
   </testcase>
-  <testcase name="shouldRejectNullCategory" classname="dio.budgeting.BudgetingApplicationTests" time="0.006"/>
+  <testcase name="shouldRejectNullCategory" classname="dio.budgeting.BudgetingApplicationTests" time="0.005"/>
   <testcase name="shouldTrimDescriptionAndCategory" classname="dio.budgeting.BudgetingApplicationTests" time="0.004"/>
-  <testcase name="shouldGetTotalIncomeBetweenDates" classname="dio.budgeting.BudgetingApplicationTests" time="0.012">
+  <testcase name="shouldGetTotalIncomeBetweenDates" classname="dio.budgeting.BudgetingApplicationTests" time="0.013">
     <system-out><![CDATA[Hibernate: 
     insert 
     into
@@ -237,8 +238,8 @@ Hibernate:
         and t1_0.created_at<?
 ]]></system-out>
   </testcase>
-  <testcase name="shouldCreateIncome" classname="dio.budgeting.BudgetingApplicationTests" time="0.005"/>
-  <testcase name="shouldRejectNullDescription" classname="dio.budgeting.BudgetingApplicationTests" time="0.004"/>
+  <testcase name="shouldCreateIncome" classname="dio.budgeting.BudgetingApplicationTests" time="0.006"/>
+  <testcase name="shouldRejectNullDescription" classname="dio.budgeting.BudgetingApplicationTests" time="0.005"/>
   <testcase name="shouldCreateExpense" classname="dio.budgeting.BudgetingApplicationTests" time="0.004"/>
   <testcase name="shouldFindByDateRange" classname="dio.budgeting.BudgetingApplicationTests" time="0.012">
     <system-out><![CDATA[Hibernate: 
@@ -273,7 +274,7 @@ Hibernate:
         t1_0.created_at desc
 ]]></system-out>
   </testcase>
-  <testcase name="shouldGetMonthlySummary" classname="dio.budgeting.BudgetingApplicationTests" time="0.011">
+  <testcase name="shouldGetMonthlySummary" classname="dio.budgeting.BudgetingApplicationTests" time="0.012">
     <system-out><![CDATA[Hibernate: 
     insert 
     into
@@ -306,7 +307,7 @@ Hibernate:
         t1_0.created_at desc
 ]]></system-out>
   </testcase>
-  <testcase name="shouldGetLargestTransactions" classname="dio.budgeting.BudgetingApplicationTests" time="0.015">
+  <testcase name="shouldGetLargestTransactions" classname="dio.budgeting.BudgetingApplicationTests" time="0.017">
     <system-out><![CDATA[Hibernate: 
     insert 
     into
@@ -366,8 +367,8 @@ Hibernate:
         first ? rows only
 ]]></system-out>
   </testcase>
-  <testcase name="shouldRejectBlankDescription" classname="dio.budgeting.BudgetingApplicationTests" time="0.005"/>
-  <testcase name="shouldRejectNegativeAmount" classname="dio.budgeting.BudgetingApplicationTests" time="0.004"/>
+  <testcase name="shouldRejectBlankDescription" classname="dio.budgeting.BudgetingApplicationTests" time="0.004"/>
+  <testcase name="shouldRejectNegativeAmount" classname="dio.budgeting.BudgetingApplicationTests" time="0.005"/>
   <testcase name="shouldGetExpensesByCategory" classname="dio.budgeting.BudgetingApplicationTests" time="0.016">
     <system-out><![CDATA[Hibernate: 
     insert 
@@ -406,7 +407,7 @@ Hibernate:
         2 desc
 ]]></system-out>
   </testcase>
-  <testcase name="shouldSearchByDescription" classname="dio.budgeting.BudgetingApplicationTests" time="0.016">
+  <testcase name="shouldSearchByDescription" classname="dio.budgeting.BudgetingApplicationTests" time="0.017">
     <system-out><![CDATA[Hibernate: 
     insert 
     into
@@ -445,7 +446,7 @@ Hibernate:
         t1_0.created_at desc
 ]]></system-out>
   </testcase>
-  <testcase name="shouldFindByCategory" classname="dio.budgeting.BudgetingApplicationTests" time="0.015">
+  <testcase name="shouldFindByCategory" classname="dio.budgeting.BudgetingApplicationTests" time="0.013">
     <system-out><![CDATA[Hibernate: 
     insert 
     into
@@ -499,7 +500,7 @@ Hibernate:
         t1_0.created_at desc
 ]]></system-out>
   </testcase>
-  <testcase name="shouldGetIncomeByCategory" classname="dio.budgeting.BudgetingApplicationTests" time="0.011">
+  <testcase name="shouldGetIncomeByCategory" classname="dio.budgeting.BudgetingApplicationTests" time="0.012">
     <system-out><![CDATA[Hibernate: 
     insert 
     into
@@ -577,8 +578,8 @@ Hibernate:
 ]]></system-out>
   </testcase>
   <testcase name="shouldRejectBlankCategory" classname="dio.budgeting.BudgetingApplicationTests" time="0.003"/>
-  <testcase name="contextLoads" classname="dio.budgeting.BudgetingApplicationTests" time="0.002"/>
-  <testcase name="shouldGetDailySummary" classname="dio.budgeting.BudgetingApplicationTests" time="0.009">
+  <testcase name="contextLoads" classname="dio.budgeting.BudgetingApplicationTests" time="0.003"/>
+  <testcase name="shouldGetDailySummary" classname="dio.budgeting.BudgetingApplicationTests" time="0.007">
     <system-out><![CDATA[Hibernate: 
     insert 
     into
@@ -683,7 +684,7 @@ from
     transactions t1_0
 ]]></system-out>
   </testcase>
-  <testcase name="shouldGetBalanceSince" classname="dio.budgeting.BudgetingApplicationTests" time="0.01">
+  <testcase name="shouldGetBalanceSince" classname="dio.budgeting.BudgetingApplicationTests" time="0.011">
     <system-out><![CDATA[Hibernate: 
     insert 
     into

@@ -9,119 +9,154 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/transactions")
 @RequiredArgsConstructor
-@Validated
 public class TransactionController {
 
     private final TransactionService transactionService;
     private final AiService aiService;
 
     @PostMapping("/income")
-    public ResponseEntity<Transaction> createIncome(@Valid @RequestBody CreateTransactionRequest request) {
+    public ResponseEntity<ApiResponse<Transaction>> createIncome(@Valid @RequestBody CreateTransactionRequest request) {
         Transaction transaction = transactionService.createIncome(request.amount(), request.description(), request.category());
-        return ResponseEntity.ok(transaction);
+        return ApiResponse.created(transaction);
     }
 
     @PostMapping("/expense")
-    public ResponseEntity<Transaction> createExpense(@Valid @RequestBody CreateTransactionRequest request) {
+    public ResponseEntity<ApiResponse<Transaction>> createExpense(@Valid @RequestBody CreateTransactionRequest request) {
         Transaction transaction = transactionService.createExpense(request.amount(), request.description(), request.category());
-        return ResponseEntity.ok(transaction);
+        return ApiResponse.created(transaction);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Transaction> findById(@PathVariable @NotNull String id) {
-        return transactionService.findById(java.util.UUID.fromString(id))
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ApiResponse<Transaction>> findById(@PathVariable("id") String id) {
+        return transactionService.findById(UUID.fromString(id))
+                .map(ApiResponse::ok)
+                .orElse(ApiResponse.notFound("Transação não encontrada"));
     }
 
     @GetMapping
-    public ResponseEntity<List<Transaction>> findAll() {
-        return ResponseEntity.ok(transactionService.findAll());
+    public ResponseEntity<ApiResponse<List<Transaction>>> findAll() {
+        return ApiResponse.ok(transactionService.findAll());
     }
 
     @GetMapping("/type/{type}")
-    public ResponseEntity<List<Transaction>> findByType(@PathVariable String type) {
-        return ResponseEntity.ok(transactionService.findByType(Transaction.TransactionType.valueOf(type.toUpperCase())));
+    public ResponseEntity<ApiResponse<List<Transaction>>> findByType(@PathVariable("type") String type) {
+        return ApiResponse.ok(transactionService.findByType(Transaction.TransactionType.valueOf(type.toUpperCase())));
     }
 
     @GetMapping("/category/{category}")
-    public ResponseEntity<List<Transaction>> findByCategory(@PathVariable String category) {
-        return ResponseEntity.ok(transactionService.findByCategory(category));
+    public ResponseEntity<ApiResponse<List<Transaction>>> findByCategory(@PathVariable("category") String category) {
+        return ApiResponse.ok(transactionService.findByCategory(category));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Void>> deleteTransaction(@PathVariable("id") String id) {
+        transactionService.deleteTransaction(UUID.fromString(id));
+        return ApiResponse.ok(null);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse<List<Transaction>>> searchByDescription(@RequestParam("q") String q) {
+        return ApiResponse.ok(transactionService.searchByDescription(q));
+    }
+
+    @GetMapping("/largest")
+    public ResponseEntity<ApiResponse<List<Transaction>>> getLargestTransactions() {
+        return ApiResponse.ok(transactionService.getLargestTransactions());
     }
 
     @GetMapping("/balance")
-    public ResponseEntity<Map<String, Object>> getBalance() {
-        return ResponseEntity.ok(Map.of("balance", transactionService.getBalance()));
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getBalance() {
+        return ApiResponse.ok(Map.of("balance", transactionService.getBalance()));
     }
 
     @GetMapping("/balance/since")
-    public ResponseEntity<Map<String, Object>> getBalanceSince(@RequestParam String startDate) {
-        return ResponseEntity.ok(Map.of("balance", transactionService.getBalanceSince(java.time.LocalDateTime.parse(startDate))));
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getBalanceSince(
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate) {
+        return ApiResponse.ok(Map.of("balance", transactionService.getBalanceSince(startDate)));
     }
 
     @GetMapping("/income/total")
-    public ResponseEntity<Map<String, Object>> getTotalIncome(
-            @RequestParam String startDate, @RequestParam String endDate) {
-        return ResponseEntity.ok(Map.of("totalIncome",
-                transactionService.getTotalIncomeBetween(java.time.LocalDateTime.parse(startDate), java.time.LocalDateTime.parse(endDate))));
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getTotalIncome(
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
+        return ApiResponse.ok(Map.of("totalIncome", transactionService.getTotalIncomeBetween(startDate, endDate)));
     }
 
     @GetMapping("/expense/total")
-    public ResponseEntity<Map<String, Object>> getTotalExpense(
-            @RequestParam String startDate, @RequestParam String endDate) {
-        return ResponseEntity.ok(Map.of("totalExpense",
-                transactionService.getTotalExpenseBetween(java.time.LocalDateTime.parse(startDate), java.time.LocalDateTime.parse(endDate))));
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getTotalExpense(
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
+        return ApiResponse.ok(Map.of("totalExpense", transactionService.getTotalExpenseBetween(startDate, endDate)));
     }
 
     @GetMapping("/expense/by-category")
-    public ResponseEntity<Map<String, Object>> getExpensesByCategory(
-            @RequestParam String startDate, @RequestParam String endDate) {
-        return ResponseEntity.ok(Map.of("categories",
-                transactionService.getExpensesByCategoryBetween(java.time.LocalDateTime.parse(startDate), java.time.LocalDateTime.parse(endDate))));
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getExpensesByCategory(
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
+        return ApiResponse.ok(Map.of("categories", transactionService.getExpensesByCategoryBetween(startDate, endDate)));
+    }
+
+    @GetMapping("/income/by-category")
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getIncomeByCategory(
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
+        return ApiResponse.ok(Map.of("categories", transactionService.getIncomeByCategoryBetween(startDate, endDate)));
     }
 
     @GetMapping("/summary/monthly")
-    public ResponseEntity<Map<String, Object>> getMonthlySummary(@RequestParam(defaultValue = "3") int months) {
-        return ResponseEntity.ok(Map.of("months", transactionService.getMonthlySummary(months)));
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getMonthlySummary(@RequestParam(defaultValue = "3") int months) {
+        return ApiResponse.ok(Map.of("months", transactionService.getMonthlySummary(months)));
+    }
+
+    @GetMapping("/summary/daily")
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getDailySummary(@RequestParam(defaultValue = "7") int days) {
+        return ApiResponse.ok(Map.of("days", transactionService.getDailySummary(days)));
     }
 
     @GetMapping("/range")
-    public ResponseEntity<List<Transaction>> findByDateRange(
-            @RequestParam String startDate, @RequestParam String endDate) {
-        return ResponseEntity.ok(transactionService.findByDateRange(
-                java.time.LocalDateTime.parse(startDate), java.time.LocalDateTime.parse(endDate)));
+    public ResponseEntity<ApiResponse<List<Transaction>>> findByDateRange(
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
+        return ApiResponse.ok(transactionService.findByDateRange(startDate, endDate));
     }
 
-    @PostMapping(value = "/ai/voice", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public ResponseEntity<byte[]> processVoiceCommand(@RequestParam("audio") MultipartFile audioFile) {
+    @PostMapping(value = "/ai/voice", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ApiResponse<byte[]>> processVoiceCommand(@RequestParam("audio") MultipartFile audioFile) {
         try {
             byte[] audioResponse = aiService.processAudioCommand(audioFile);
-            return ResponseEntity.ok()
+            return ResponseEntity.status(HttpStatus.CREATED)
                     .contentType(MediaType.parseMediaType("audio/mpeg"))
-                    .body(audioResponse);
+                    .body(new ApiResponse<>(true, "Áudio processado com sucesso", audioResponse, null));
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
+            return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Erro ao processar comando de voz: " + e.getMessage());
         }
     }
 
     @PostMapping("/ai/text")
-    public ResponseEntity<Map<String, String>> processTextCommand(@RequestBody Map<String, String> request) {
+    public ResponseEntity<ApiResponse<Map<String, String>>> processTextCommand(@RequestBody Map<String, String> request) {
         String text = request.get("text");
+        if (text == null || text.isBlank()) {
+            return ApiResponse.badRequest("O campo 'text' é obrigatório");
+        }
         String response = aiService.processTextCommand(text);
-        return ResponseEntity.ok(Map.of("response", response));
+        return ApiResponse.ok(Map.of("response", response));
     }
 
     public record CreateTransactionRequest(
